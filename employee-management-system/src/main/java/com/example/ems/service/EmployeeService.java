@@ -1,18 +1,21 @@
 package com.example.ems.service;
 
+import com.example.ems.dto.EmployeeRequestDTO;
+import com.example.ems.dto.EmployeeResponseDTO;
 import com.example.ems.entity.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getAllEmployees();
+    List<EmployeeResponseDTO> getAllEmployees();
 
-    Employee addEmployee(Employee employee);
+    EmployeeResponseDTO addEmployee(EmployeeRequestDTO employeeRequestDTO);
 
-    Employee getEmployeeById(Long id);
+    EmployeeResponseDTO getEmployeeById(Long id);
 
-    Employee updateEmployee(Long id, Employee employee);
+
+    EmployeeResponseDTO updateEmployee(Long id, EmployeeRequestDTO dto);
 
     void deleteEmployee(Long id);
 
