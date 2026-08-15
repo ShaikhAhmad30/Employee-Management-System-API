@@ -7,6 +7,8 @@ import com.example.ems.entity.Employee;
 import com.example.ems.service.EmployeeService;
 import jakarta.persistence.Id;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,8 @@ public class EmployeeController {
 
 
     @GetMapping("/api/v1/employees")
-    public List<EmployeeResponseDTO> getAllEmployee(){
-        return employeeService.getAllEmployees();
+    public Page<EmployeeResponseDTO> getAllEmployee(Pageable pageable){
+        return employeeService.getAllEmployees(pageable);
     }
 
     @PostMapping("/api/v1/employees")
@@ -41,7 +43,7 @@ public class EmployeeController {
     @PutMapping("/api/v1/employees/{id}")
     public EmployeeResponseDTO updateEmployee(
             @PathVariable Long id,
-            @RequestBody EmployeeResponseDTO employeeRequestDTO
+            @RequestBody EmployeeRequestDTO employeeRequestDTO
     ){
         return employeeService.updateEmployee(id, employeeRequestDTO);
     }

@@ -5,9 +5,10 @@ import com.example.ems.dto.EmployeeResponseDTO;
 import com.example.ems.entity.Employee;
 import com.example.ems.exception.EmployeeNotFoundException;
 import com.example.ems.repository.EmployeeRepository;
+import org.springframework.data.domain.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 
 @Service
@@ -39,13 +40,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 
     @Override
-    public List<EmployeeResponseDTO> getAllEmployees()
+    public Page<EmployeeResponseDTO> getAllEmployees(Pageable pageable)
 
     {
-        List<Employee> employees = employeeRepository.findAll();
-        return employees.stream()
-                .map(this::convertToResponseDTO)
-                .toList();
+        Page<Employee> employees = employeeRepository.findAll(pageable);
+        return employees.map(this::convertToResponseDTO);
     }
 
 
